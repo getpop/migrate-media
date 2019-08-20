@@ -20,9 +20,11 @@ class FieldValueResolver_Posts_Unit extends \PoP\Engine\AbstractDBDataFieldValue
                 return $cmsmediapostsapi->getPostThumbnailId($fieldValueResolver->getId($post));
 
             case 'featuredimage-props':
-                $size = $fieldArgs['size'];
-                $image_id = $cmsmediapostsapi->getPostThumbnailId($fieldValueResolver->getId($post));
-                return Utils::getAttachmentImageProperties($image_id, $size);
+                if ($image_id = $cmsmediapostsapi->getPostThumbnailId($fieldValueResolver->getId($post))) {
+                    $size = $fieldArgs['size'];
+                    return Utils::getAttachmentImageProperties($image_id, $size);
+                }
+                return null;
         }
 
         return parent::getValue($fieldValueResolver, $resultitem, $fieldName, $fieldArgs);
