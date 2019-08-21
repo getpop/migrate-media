@@ -1,7 +1,7 @@
 <?php
 namespace PoP\Media;
 
-class FieldValueResolver_Posts_Unit extends \PoP\Engine\AbstractDBDataFieldValueResolverUnit
+class FieldValueResolver_Posts_Unit extends \PoP\ComponentModel\AbstractDBDataFieldValueResolverUnit
 {
     public static function getClassesToAttachTo()
     {
