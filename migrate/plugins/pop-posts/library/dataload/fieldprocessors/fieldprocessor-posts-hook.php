@@ -8,6 +8,30 @@ class FieldValueResolver_Posts_Unit extends \PoP\ComponentModel\AbstractDBDataFi
         return array(\PoP\Posts\FieldValueResolver_Posts::class);
     }
 
+    public function getFieldNamesToResolve(): array
+    {
+        return [
+			
+        ];
+    }
+
+    public function getFieldDocumentationType(string $fieldName): ?string
+    {
+        $types = [
+			
+        ];
+        return $types[$fieldName];
+    }
+
+    public function getFieldDocumentationDescription(string $fieldName): ?string
+    {
+        $translationAPI = TranslationAPIFacade::getInstance();
+        $descriptions = [
+			
+        ];
+        return $descriptions[$fieldName];
+    }
+
     public function getValue($fieldValueResolver, $resultitem, string $fieldName, array $fieldArgs = [])
     {
         $cmsmediapostsapi = \PoP\Media\PostsFunctionAPIFactory::getInstance();
