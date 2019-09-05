@@ -1,5 +1,6 @@
 <?php
 namespace PoP\Media;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class FieldValueResolver_Posts_Unit extends \PoP\ComponentModel\AbstractDBDataFieldValueResolverUnit
 {
