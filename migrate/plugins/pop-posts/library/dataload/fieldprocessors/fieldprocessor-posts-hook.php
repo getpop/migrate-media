@@ -32,9 +32,9 @@ class FieldValueResolver_Posts_Unit extends \PoP\ComponentModel\AbstractDBDataFi
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'has-thumb' => $translationAPI->__('', ''),
-            'featuredimage' => $translationAPI->__('', ''),
-            'featuredimage-props' => $translationAPI->__('', ''),
+			'has-thumb' => $translationAPI->__('Does the post have a thumbnail image?', 'pop-media'),
+            'featuredimage' => $translationAPI->__('ID of the featured image DB object', 'pop-media'),
+            'featuredimage-props' => $translationAPI->__('Properties (url, width and height) of the featured image', 'pop-media'),
         ];
         return $descriptions[$fieldName];
     }
