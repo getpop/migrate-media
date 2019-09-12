@@ -2,28 +2,26 @@
 namespace PoP\Media;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
-class FieldValueResolver_Posts_Unit extends \PoP\ComponentModel\AbstractDBDataFieldValueResolverUnit
+class FieldValueResolver_Media_Unit extends \PoP\ComponentModel\AbstractDBDataFieldValueResolverUnit
 {
     public static function getClassesToAttachTo()
     {
-        return array(\PoP\Posts\FieldValueResolver_Posts::class);
+        return array(\PoP\Media\FieldValueResolver_Media::class);
     }
 
     public function getFieldNamesToResolve(): array
     {
         return [
-            'has-featuredimage',
-            'featuredimage',
-            'featuredimage-props',
+            'author',
+            'src',
         ];
     }
 
     public function getFieldDocumentationType(string $fieldName): ?string
     {
         $types = [
-			'has-featuredimage' => TYPE_BOOL,
-            'featuredimage' => TYPE_ID,
-            'featuredimage-props' => TYPE_OBJECT,
+			'author' => TYPE_ID,
+            'src' => TYPE_STRING,
         ];
         return $types[$fieldName];
     }
@@ -32,29 +30,22 @@ class FieldValueResolver_Posts_Unit extends \PoP\ComponentModel\AbstractDBDataFi
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'has-featuredimage' => $translationAPI->__('Does the post have a featured image?', 'pop-media'),
-            'featuredimage' => $translationAPI->__('ID of the featured image DB object', 'pop-media'),
-            'featuredimage-props' => $translationAPI->__('Properties (url, width and height) of the featured image', 'pop-media'),
+			'author' => $translationAPI->__('ID of the media element\'s author', 'pop-media'),
+            'src' => $translationAPI->__('Media element URL source', 'pop-media'),
         ];
         return $descriptions[$fieldName];
     }
 
     public function getValue($fieldValueResolver, $resultitem, string $fieldName, array $fieldArgs = [])
     {
-        $cmsmediapostsapi = \PoP\Media\PostsFunctionAPIFactory::getInstance();
-        $post = $resultitem;
+        $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
+        $media = $resultitem;
         switch ($fieldName) {
-            case 'has-featuredimage':
-                return $cmsmediapostsapi->hasPostThumbnail($fieldValueResolver->getId($post));
-
-            case 'featuredimage':
-                return $cmsmediapostsapi->getPostThumbnailId($fieldValueResolver->getId($post));
-
-            case 'featuredimage-props':
-                if ($image_id = $cmsmediapostsapi->getPostThumbnailId($fieldValueResolver->getId($post))) {
-                    return Utils::getAttachmentImageProperties($image_id, $fieldArgs['size']);
-                }
-                return null;
+            case 'author':
+                return $cmsmediaapi->getMediaAuthorId($media);
+            case 'src':
+                $properties = Utils::getAttachmentImageProperties($fieldValueResolver->getId($media), $fieldArgs['size']);
+                return $properties['src'];
         }
 
         return parent::getValue($fieldValueResolver, $resultitem, $fieldName, $fieldArgs);
@@ -64,7 +55,7 @@ class FieldValueResolver_Posts_Unit extends \PoP\ComponentModel\AbstractDBDataFi
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
-            case 'featuredimage-props':
+            case 'src':
                 return [
                     [
                         'name' => 'size',
@@ -80,8 +71,8 @@ class FieldValueResolver_Posts_Unit extends \PoP\ComponentModel\AbstractDBDataFi
     public function getFieldDefaultDataloaderClass(string $fieldName, array $fieldArgs = []): ?string
     {
         switch ($fieldName) {
-            case 'featuredimage':
-                return \PoP\Media\Dataloader_MediaList::class;
+            case 'author':
+                return \PoP\Users\Dataloader_ConvertibleUserList::class;
         }
 
         return parent::getFieldDefaultDataloaderClass($fieldName, $fieldArgs);
@@ -89,4 +80,4 @@ class FieldValueResolver_Posts_Unit extends \PoP\ComponentModel\AbstractDBDataFi
 }
 
 // Static Initialization: Attach
-FieldValueResolver_Posts_Unit::attach();
+FieldValueResolver_Media_Unit::attach();
