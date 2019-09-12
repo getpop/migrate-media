@@ -44,7 +44,26 @@ class FieldValueResolver_Media_Unit extends \PoP\ComponentModel\AbstractDBDataFi
             case 'author':
                 return $cmsmediaapi->getMediaAuthorId($media);
             case 'src':
-                $properties = Utils::getAttachmentImageProperties($fieldValueResolver->getId($media), $fieldArgs['size']);
+                // To calculate the size, offer the following strategies:
+                // 1. Set it explicitly
+                if (isset($fieldArgs['size'])) {
+                    $size = $fieldArgs['size'];
+                } else {
+                    // 2. Infer it from "device"
+                    if (isset($fieldArgs['device'])) {
+                        if ($fieldArgs['device'] == 'mobile') {
+                            // 3. Infer it from the screen size
+                            if (isset($fieldArgs['screenWidth']) && (int) $fieldArgs['screenWidth'] < 200) {
+                                $size = 'thumbnail';
+                            } else {
+                                $size = 'medium';
+                            }
+                        } elseif ($fieldArgs['device'] == 'desktop') {
+                            $size = 'large';
+                        }
+                    }
+                }
+                $properties = Utils::getAttachmentImageProperties($fieldValueResolver->getId($media), $size);
                 return $properties['src'];
         }
 
@@ -61,6 +80,20 @@ class FieldValueResolver_Media_Unit extends \PoP\ComponentModel\AbstractDBDataFi
                         'name' => 'size',
                         'type' => TYPE_STRING,
                         'description' => $translationAPI->__('Size of the image', 'pop-media'),
+                    ],
+                    [
+                        'name' => 'device',
+                        'type' => TYPE_ENUM,
+                        'description' => $translationAPI->__('Device where to show the image', 'pop-media'),
+                        'enum-values' => [
+                            'mobile',
+                            'desktop',
+                        ],
+                    ],
+                    [
+                        'name' => 'screenWidth',
+                        'type' => TYPE_INT,
+                        'description' => $translationAPI->__('Width of the screen where to show the image', 'pop-media'),
                     ],
                 ];
         }
