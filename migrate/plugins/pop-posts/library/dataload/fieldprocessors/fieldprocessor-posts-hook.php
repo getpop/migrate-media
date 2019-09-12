@@ -12,7 +12,7 @@ class FieldValueResolver_Posts_Unit extends \PoP\ComponentModel\AbstractDBDataFi
     public function getFieldNamesToResolve(): array
     {
         return [
-            'has-thumb',
+            'has-featuredimage',
             'featuredimage',
             'featuredimage-props',
         ];
@@ -21,7 +21,7 @@ class FieldValueResolver_Posts_Unit extends \PoP\ComponentModel\AbstractDBDataFi
     public function getFieldDocumentationType(string $fieldName): ?string
     {
         $types = [
-			'has-thumb' => TYPE_BOOL,
+			'has-featuredimage' => TYPE_BOOL,
             'featuredimage' => TYPE_ID,
             'featuredimage-props' => TYPE_OBJECT,
         ];
@@ -32,7 +32,7 @@ class FieldValueResolver_Posts_Unit extends \PoP\ComponentModel\AbstractDBDataFi
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'has-thumb' => $translationAPI->__('Does the post have a thumbnail image?', 'pop-media'),
+			'has-featuredimage' => $translationAPI->__('Does the post have a featured image?', 'pop-media'),
             'featuredimage' => $translationAPI->__('ID of the featured image DB object', 'pop-media'),
             'featuredimage-props' => $translationAPI->__('Properties (url, width and height) of the featured image', 'pop-media'),
         ];
@@ -44,7 +44,7 @@ class FieldValueResolver_Posts_Unit extends \PoP\ComponentModel\AbstractDBDataFi
         $cmsmediapostsapi = \PoP\Media\PostsFunctionAPIFactory::getInstance();
         $post = $resultitem;
         switch ($fieldName) {
-            case 'has-thumb':
+            case 'has-featuredimage':
                 return $cmsmediapostsapi->hasPostThumbnail($fieldValueResolver->getId($post));
 
             case 'featuredimage':
