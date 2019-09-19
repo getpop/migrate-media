@@ -138,4 +138,4 @@ class FieldValueResolver_Media_Unit extends \PoP\ComponentModel\AbstractDBDataFi
 }
 
 // Static Initialization: Attach
-FieldValueResolver_Media_Unit::attach();
+FieldValueResolver_Media_Unit::attach(POP_ATTACHABLEEXTENSIONGROUP_FIELDVALUERESOLVERUNITS);
