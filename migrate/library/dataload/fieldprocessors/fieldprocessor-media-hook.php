@@ -4,7 +4,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 
 class FieldValueResolver_Media_Unit extends \PoP\ComponentModel\AbstractDBDataFieldValueResolverUnit
 {
-    public static function getClassesToAttachTo()
+    public static function getClassesToAttachTo(): array
     {
         return array(\PoP\Media\FieldValueResolver_Media::class);
     }
