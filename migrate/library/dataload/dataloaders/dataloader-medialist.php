@@ -21,12 +21,12 @@ class Dataloader_MediaList extends Dataloader_MediaListBase
         return $cmsmediaapi->getMediaElements($query, $options);
     }
 
-    public function executeQueryIds($query)
+    public function executeQueryIds($query): array
     {
         $options = [
             'return-type' => POP_RETURNTYPE_IDS,
         ];
-        return $this->executeQuery($query, $options);
+        return (array)$this->executeQuery($query, $options);
     }
 }
 

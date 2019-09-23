@@ -13,7 +13,7 @@ abstract class Dataloader_MediaBase extends \PoP\ComponentModel\QueryDataDataloa
         return FieldValueResolver_Media::class;
     }
 
-    public function executeGetData(array $ids)
+    public function executeGetData(array $ids): array
     {
         if ($ids) {
             $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
