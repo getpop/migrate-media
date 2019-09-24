@@ -2,7 +2,7 @@
 namespace PoP\Media;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
-class FieldResolver_Media_Unit extends \PoP\ComponentModel\AbstractDBDataFieldValueResolver
+class FieldValueResolver_Media extends \PoP\ComponentModel\AbstractDBDataFieldValueResolver
 {
     public static function getClassesToAttachTo(): array
     {
@@ -138,4 +138,4 @@ class FieldResolver_Media_Unit extends \PoP\ComponentModel\AbstractDBDataFieldVa
 }
 
 // Static Initialization: Attach
-FieldResolver_Media_Unit::attach(POP_ATTACHABLEEXTENSIONGROUP_FIELDVALUERESOLVERUNITS);
+FieldValueResolver_Media::attach(POP_ATTACHABLEEXTENSIONGROUP_FIELDVALUERESOLVERUNITS);
