@@ -2,11 +2,11 @@
 namespace PoP\Media;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
-class FieldValueResolver_Media_Unit extends \PoP\ComponentModel\AbstractDBDataFieldValueResolverUnit
+class FieldResolver_Media_Unit extends \PoP\ComponentModel\AbstractDBDataFieldValueResolver
 {
     public static function getClassesToAttachTo(): array
     {
-        return array(\PoP\Media\FieldValueResolver_Media::class);
+        return array(\PoP\Media\FieldResolver_Media::class);
     }
 
     public function getFieldNamesToResolve(): array
@@ -35,7 +35,7 @@ class FieldValueResolver_Media_Unit extends \PoP\ComponentModel\AbstractDBDataFi
         ];
         return $descriptions[$fieldName];
     }
-    public function getSchemaValidationErrorDescription($fieldValueResolver, string $fieldName, array $fieldArgs = []): ?string
+    public function getSchemaValidationErrorDescription($fieldResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
@@ -52,10 +52,10 @@ class FieldValueResolver_Media_Unit extends \PoP\ComponentModel\AbstractDBDataFi
                 break;
         }
 
-        return parent::getSchemaValidationErrorDescription($fieldValueResolver, $fieldName, $fieldArgs);
+        return parent::getSchemaValidationErrorDescription($fieldResolver, $fieldName, $fieldArgs);
     }
 
-    public function getValue($fieldValueResolver, $resultitem, string $fieldName, array $fieldArgs = [])
+    public function getValue($fieldResolver, $resultitem, string $fieldName, array $fieldArgs = [])
     {
         $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
         $media = $resultitem;
@@ -88,11 +88,11 @@ class FieldValueResolver_Media_Unit extends \PoP\ComponentModel\AbstractDBDataFi
                         }
                     }
                 }
-                $properties = Utils::getAttachmentImageProperties($fieldValueResolver->getId($media), $size);
+                $properties = Utils::getAttachmentImageProperties($fieldResolver->getId($media), $size);
                 return $properties['src'];
         }
 
-        return parent::getValue($fieldValueResolver, $resultitem, $fieldName, $fieldArgs);
+        return parent::getValue($fieldResolver, $resultitem, $fieldName, $fieldArgs);
     }
 
     protected function getDeviceValues() {
@@ -138,4 +138,4 @@ class FieldValueResolver_Media_Unit extends \PoP\ComponentModel\AbstractDBDataFi
 }
 
 // Static Initialization: Attach
-FieldValueResolver_Media_Unit::attach(POP_ATTACHABLEEXTENSIONGROUP_FIELDVALUERESOLVERUNITS);
+FieldResolver_Media_Unit::attach(POP_ATTACHABLEEXTENSIONGROUP_FIELDVALUERESOLVERUNITS);

@@ -1,7 +1,7 @@
 <?php
 namespace PoP\Media;
 
-class FieldValueResolver_Media extends \PoP\ComponentModel\FieldValueResolverBase
+class FieldResolver_Media extends \PoP\ComponentModel\FieldResolverBase
 {
     public function getId($resultitem)
     {

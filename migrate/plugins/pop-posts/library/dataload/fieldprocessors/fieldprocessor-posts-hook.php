@@ -2,11 +2,11 @@
 namespace PoP\Media;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
-class FieldValueResolver_Posts_Unit extends \PoP\ComponentModel\AbstractDBDataFieldValueResolverUnit
+class FieldResolver_Posts_Unit extends \PoP\ComponentModel\AbstractDBDataFieldValueResolver
 {
     public static function getClassesToAttachTo(): array
     {
-        return array(\PoP\Posts\FieldValueResolver_Posts::class);
+        return array(\PoP\Posts\FieldResolver_Posts::class);
     }
 
     public function getFieldNamesToResolve(): array
@@ -39,25 +39,25 @@ class FieldValueResolver_Posts_Unit extends \PoP\ComponentModel\AbstractDBDataFi
         return $descriptions[$fieldName];
     }
 
-    public function getValue($fieldValueResolver, $resultitem, string $fieldName, array $fieldArgs = [])
+    public function getValue($fieldResolver, $resultitem, string $fieldName, array $fieldArgs = [])
     {
         $cmsmediapostsapi = \PoP\Media\PostsFunctionAPIFactory::getInstance();
         $post = $resultitem;
         switch ($fieldName) {
             case 'has-featuredimage':
-                return $cmsmediapostsapi->hasPostThumbnail($fieldValueResolver->getId($post));
+                return $cmsmediapostsapi->hasPostThumbnail($fieldResolver->getId($post));
 
             case 'featuredimage':
-                return $cmsmediapostsapi->getPostThumbnailId($fieldValueResolver->getId($post));
+                return $cmsmediapostsapi->getPostThumbnailId($fieldResolver->getId($post));
 
             case 'featuredimage-props':
-                if ($image_id = $cmsmediapostsapi->getPostThumbnailId($fieldValueResolver->getId($post))) {
+                if ($image_id = $cmsmediapostsapi->getPostThumbnailId($fieldResolver->getId($post))) {
                     return Utils::getAttachmentImageProperties($image_id, $fieldArgs['size']);
                 }
                 return null;
         }
 
-        return parent::getValue($fieldValueResolver, $resultitem, $fieldName, $fieldArgs);
+        return parent::getValue($fieldResolver, $resultitem, $fieldName, $fieldArgs);
     }
 
     public function getFieldDocumentationArgs(string $fieldName): ?array
@@ -89,4 +89,4 @@ class FieldValueResolver_Posts_Unit extends \PoP\ComponentModel\AbstractDBDataFi
 }
 
 // Static Initialization: Attach
-FieldValueResolver_Posts_Unit::attach(POP_ATTACHABLEEXTENSIONGROUP_FIELDVALUERESOLVERUNITS);
+FieldResolver_Posts_Unit::attach(POP_ATTACHABLEEXTENSIONGROUP_FIELDVALUERESOLVERUNITS);

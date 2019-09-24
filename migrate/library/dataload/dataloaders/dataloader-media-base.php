@@ -8,9 +8,9 @@ abstract class Dataloader_MediaBase extends \PoP\ComponentModel\QueryDataDataloa
         return GD_DATABASE_KEY_MEDIA;
     }
 
-    public function getFieldValueResolverClass(): string
+    public function getFieldResolverClass(): string
     {
-        return FieldValueResolver_Media::class;
+        return FieldResolver_Media::class;
     }
 
     public function executeGetData(array $ids): array
