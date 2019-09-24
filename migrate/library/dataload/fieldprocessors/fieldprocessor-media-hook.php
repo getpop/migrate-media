@@ -55,10 +55,10 @@ class FieldValueResolver_Media extends \PoP\ComponentModel\AbstractDBDataFieldVa
         return parent::getSchemaValidationErrorDescription($fieldResolver, $fieldName, $fieldArgs);
     }
 
-    public function getValue($fieldResolver, $resultitem, string $fieldName, array $fieldArgs = [])
+    public function getValue($fieldResolver, $resultItem, string $fieldName, array $fieldArgs = [])
     {
         $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
-        $media = $resultitem;
+        $media = $resultItem;
         switch ($fieldName) {
             case 'author':
                 return $cmsmediaapi->getMediaAuthorId($media);
@@ -92,7 +92,7 @@ class FieldValueResolver_Media extends \PoP\ComponentModel\AbstractDBDataFieldVa
                 return $properties['src'];
         }
 
-        return parent::getValue($fieldResolver, $resultitem, $fieldName, $fieldArgs);
+        return parent::getValue($fieldResolver, $resultItem, $fieldName, $fieldArgs);
     }
 
     protected function getDeviceValues() {

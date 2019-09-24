@@ -39,10 +39,10 @@ class FieldValueResolver_Posts extends \PoP\ComponentModel\AbstractDBDataFieldVa
         return $descriptions[$fieldName];
     }
 
-    public function getValue($fieldResolver, $resultitem, string $fieldName, array $fieldArgs = [])
+    public function getValue($fieldResolver, $resultItem, string $fieldName, array $fieldArgs = [])
     {
         $cmsmediapostsapi = \PoP\Media\PostsFunctionAPIFactory::getInstance();
-        $post = $resultitem;
+        $post = $resultItem;
         switch ($fieldName) {
             case 'has-featuredimage':
                 return $cmsmediapostsapi->hasPostThumbnail($fieldResolver->getId($post));
@@ -57,7 +57,7 @@ class FieldValueResolver_Posts extends \PoP\ComponentModel\AbstractDBDataFieldVa
                 return null;
         }
 
-        return parent::getValue($fieldResolver, $resultitem, $fieldName, $fieldArgs);
+        return parent::getValue($fieldResolver, $resultItem, $fieldName, $fieldArgs);
     }
 
     public function getFieldDocumentationArgs(string $fieldName): ?array

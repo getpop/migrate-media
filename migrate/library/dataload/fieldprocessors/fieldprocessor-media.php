@@ -3,10 +3,10 @@ namespace PoP\Media;
 
 class FieldResolver_Media extends \PoP\ComponentModel\FieldResolverBase
 {
-    public function getId($resultitem)
+    public function getId($resultItem)
     {
         $cmsmediaresolver = \PoP\Media\ObjectPropertyResolverFactory::getInstance();
-        $media = $resultitem;
+        $media = $resultItem;
         return $cmsmediaresolver->getMediaId($media);
     }
 
