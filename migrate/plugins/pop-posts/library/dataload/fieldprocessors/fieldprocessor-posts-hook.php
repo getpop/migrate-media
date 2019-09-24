@@ -89,4 +89,4 @@ class FieldValueResolver_Posts extends \PoP\ComponentModel\AbstractDBDataFieldVa
 }
 
 // Static Initialization: Attach
-FieldValueResolver_Posts::attach(POP_ATTACHABLEEXTENSIONGROUP_FIELDVALUERESOLVERUNITS);
+FieldValueResolver_Posts::attach(POP_ATTACHABLEEXTENSIONGROUP_FIELDVALUERESOLVERS);
