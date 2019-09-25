@@ -55,7 +55,7 @@ class FieldValueResolver_Media extends \PoP\ComponentModel\AbstractDBDataFieldVa
         return parent::getSchemaValidationErrorDescription($fieldResolver, $fieldName, $fieldArgs);
     }
 
-    public function getValue($fieldResolver, $resultItem, string $fieldName, array $fieldArgs = [])
+    public function resolveValue($fieldResolver, $resultItem, string $fieldName, array $fieldArgs = [])
     {
         $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
         $media = $resultItem;
@@ -92,7 +92,7 @@ class FieldValueResolver_Media extends \PoP\ComponentModel\AbstractDBDataFieldVa
                 return $properties['src'];
         }
 
-        return parent::getValue($fieldResolver, $resultItem, $fieldName, $fieldArgs);
+        return parent::resolveValue($fieldResolver, $resultItem, $fieldName, $fieldArgs);
     }
 
     protected function getDeviceValues() {

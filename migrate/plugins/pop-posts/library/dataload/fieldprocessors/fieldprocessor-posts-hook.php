@@ -39,7 +39,7 @@ class FieldValueResolver_Posts extends \PoP\ComponentModel\AbstractDBDataFieldVa
         return $descriptions[$fieldName];
     }
 
-    public function getValue($fieldResolver, $resultItem, string $fieldName, array $fieldArgs = [])
+    public function resolveValue($fieldResolver, $resultItem, string $fieldName, array $fieldArgs = [])
     {
         $cmsmediapostsapi = \PoP\Media\PostsFunctionAPIFactory::getInstance();
         $post = $resultItem;
@@ -57,7 +57,7 @@ class FieldValueResolver_Posts extends \PoP\ComponentModel\AbstractDBDataFieldVa
                 return null;
         }
 
-        return parent::getValue($fieldResolver, $resultItem, $fieldName, $fieldArgs);
+        return parent::resolveValue($fieldResolver, $resultItem, $fieldName, $fieldArgs);
     }
 
     public function getFieldDocumentationArgs(string $fieldName): ?array
