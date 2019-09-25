@@ -126,14 +126,14 @@ class FieldValueResolver_Media extends \PoP\ComponentModel\AbstractDBDataFieldVa
         return parent::getFieldDocumentationArgs($fieldName);
     }
 
-    public function getFieldDefaultDataloaderClass(string $fieldName, array $fieldArgs = []): ?string
+    public function resolveFieldDefaultDataloaderClass(string $fieldName, array $fieldArgs = []): ?string
     {
         switch ($fieldName) {
             case 'author':
                 return \PoP\Users\Dataloader_ConvertibleUserList::class;
         }
 
-        return parent::getFieldDefaultDataloaderClass($fieldName, $fieldArgs);
+        return parent::resolveFieldDefaultDataloaderClass($fieldName, $fieldArgs);
     }
 }
 

@@ -77,14 +77,14 @@ class FieldValueResolver_Posts extends \PoP\ComponentModel\AbstractDBDataFieldVa
         return parent::getFieldDocumentationArgs($fieldName);
     }
 
-    public function getFieldDefaultDataloaderClass(string $fieldName, array $fieldArgs = []): ?string
+    public function resolveFieldDefaultDataloaderClass(string $fieldName, array $fieldArgs = []): ?string
     {
         switch ($fieldName) {
             case 'featuredimage':
                 return \PoP\Media\Dataloader_MediaList::class;
         }
 
-        return parent::getFieldDefaultDataloaderClass($fieldName, $fieldArgs);
+        return parent::resolveFieldDefaultDataloaderClass($fieldName, $fieldArgs);
     }
 }
 
