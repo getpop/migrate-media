@@ -35,7 +35,7 @@ class FieldValueResolver_Media extends \PoP\ComponentModel\AbstractDBDataFieldVa
         ];
         return $descriptions[$fieldName];
     }
-    public function getSchemaValidationErrorDescription($fieldResolver, string $fieldName, array $fieldArgs = []): ?string
+    public function resolveSchemaValidationErrorDescription($fieldResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
@@ -52,7 +52,7 @@ class FieldValueResolver_Media extends \PoP\ComponentModel\AbstractDBDataFieldVa
                 break;
         }
 
-        return parent::getSchemaValidationErrorDescription($fieldResolver, $fieldName, $fieldArgs);
+        return parent::resolveSchemaValidationErrorDescription($fieldResolver, $fieldName, $fieldArgs);
     }
 
     public function resolveValue($fieldResolver, $resultItem, string $fieldName, array $fieldArgs = [])
