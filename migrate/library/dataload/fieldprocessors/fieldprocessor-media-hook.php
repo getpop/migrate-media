@@ -21,8 +21,8 @@ class FieldValueResolver_Media extends \PoP\ComponentModel\AbstractDBDataFieldVa
     public function getFieldDocumentationType(string $fieldName): ?string
     {
         $types = [
-			'author' => TYPE_ID,
-            'src' => TYPE_STRING,
+			'author' => SchemaDefinition::TYPE_ID,
+            'src' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName];
     }
@@ -112,12 +112,12 @@ class FieldValueResolver_Media extends \PoP\ComponentModel\AbstractDBDataFieldVa
                 return [
                     [
                         SchemaDefinition::ARGNAME_NAME => 'size',
-                        SchemaDefinition::ARGNAME_NAME => TYPE_STRING,
+                        SchemaDefinition::ARGNAME_NAME => SchemaDefinition::TYPE_STRING,
                         SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Size of the image', 'pop-media'),
                     ],
                     [
                         SchemaDefinition::ARGNAME_NAME => 'device',
-                        SchemaDefinition::ARGNAME_NAME => TYPE_ENUM,
+                        SchemaDefinition::ARGNAME_NAME => SchemaDefinition::TYPE_ENUM,
                         SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Device where to show the image', 'pop-media'),
                         SchemaDefinition::ARGNAME_ENUMVALUES => $this->getDeviceValues(),
                     ],

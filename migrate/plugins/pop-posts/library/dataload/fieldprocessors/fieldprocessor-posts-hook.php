@@ -1,6 +1,7 @@
 <?php
 namespace PoP\Media;
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\SchemaDefinition;
 
 class FieldValueResolver_Posts extends \PoP\ComponentModel\AbstractDBDataFieldValueResolver
 {
@@ -21,9 +22,9 @@ class FieldValueResolver_Posts extends \PoP\ComponentModel\AbstractDBDataFieldVa
     public function getFieldDocumentationType(string $fieldName): ?string
     {
         $types = [
-			'has-featuredimage' => TYPE_BOOL,
-            'featuredimage' => TYPE_ID,
-            'featuredimage-props' => TYPE_OBJECT,
+			'has-featuredimage' => SchemaDefinition::TYPE_BOOL,
+            'featuredimage' => SchemaDefinition::TYPE_ID,
+            'featuredimage-props' => SchemaDefinition::TYPE_OBJECT,
         ];
         return $types[$fieldName];
     }
@@ -68,7 +69,7 @@ class FieldValueResolver_Posts extends \PoP\ComponentModel\AbstractDBDataFieldVa
                 return [
                     [
                         'name' => 'size',
-                        'type' => TYPE_STRING,
+                        'type' => SchemaDefinition::TYPE_STRING,
                         'description' => $translationAPI->__('Size of the image', 'pop-media'),
                     ],
                 ];
