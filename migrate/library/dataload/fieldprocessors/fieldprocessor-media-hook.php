@@ -1,6 +1,7 @@
 <?php
 namespace PoP\Media;
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\SchemaDefinition;
 
 class FieldValueResolver_Media extends \PoP\ComponentModel\AbstractDBDataFieldValueResolver
 {
@@ -110,15 +111,15 @@ class FieldValueResolver_Media extends \PoP\ComponentModel\AbstractDBDataFieldVa
             case 'src':
                 return [
                     [
-                        'name' => 'size',
-                        'type' => TYPE_STRING,
-                        'description' => $translationAPI->__('Size of the image', 'pop-media'),
+                        SchemaDefinition::ARGNAME_NAME => 'size',
+                        SchemaDefinition::ARGNAME_NAME => TYPE_STRING,
+                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Size of the image', 'pop-media'),
                     ],
                     [
-                        'name' => 'device',
-                        'type' => TYPE_ENUM,
-                        'description' => $translationAPI->__('Device where to show the image', 'pop-media'),
-                        'enum-values' => $this->getDeviceValues(),
+                        SchemaDefinition::ARGNAME_NAME => 'device',
+                        SchemaDefinition::ARGNAME_NAME => TYPE_ENUM,
+                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Device where to show the image', 'pop-media'),
+                        SchemaDefinition::ARGNAME_ENUMVALUES => $this->getDeviceValues(),
                     ],
                 ];
         }
