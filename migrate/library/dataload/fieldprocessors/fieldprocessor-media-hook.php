@@ -1,7 +1,7 @@
 <?php
 namespace PoP\Media;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 
 class FieldValueResolver_Media extends \PoP\ComponentModel\AbstractDBDataFieldValueResolver
 {
