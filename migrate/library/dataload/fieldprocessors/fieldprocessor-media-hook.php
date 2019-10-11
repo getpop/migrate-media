@@ -105,7 +105,7 @@ class FieldValueResolver_Media extends AbstractDBDataFieldValueResolver
         ];
     }
 
-    public function getFieldDocumentationArgs(string $fieldName): ?array
+    public function getFieldDocumentationArgs($fieldResolver, string $fieldName): ?array
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
@@ -125,17 +125,17 @@ class FieldValueResolver_Media extends AbstractDBDataFieldValueResolver
                 ];
         }
 
-        return parent::getFieldDocumentationArgs($fieldName);
+        return parent::getFieldDocumentationArgs($fieldResolver, $fieldName);
     }
 
-    public function resolveFieldDefaultDataloaderClass(string $fieldName, array $fieldArgs = []): ?string
+    public function resolveFieldDefaultDataloaderClass($fieldResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         switch ($fieldName) {
             case 'author':
                 return \PoP\Users\Dataloader_ConvertibleUserList::class;
         }
 
-        return parent::resolveFieldDefaultDataloaderClass($fieldName, $fieldArgs);
+        return parent::resolveFieldDefaultDataloaderClass($fieldResolver, $fieldName, $fieldArgs);
     }
 }
 

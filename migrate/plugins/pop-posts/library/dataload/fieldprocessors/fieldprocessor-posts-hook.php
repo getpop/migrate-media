@@ -62,7 +62,7 @@ class FieldValueResolver_Posts extends AbstractDBDataFieldValueResolver
         return parent::resolveValue($fieldResolver, $resultItem, $fieldName, $fieldArgs);
     }
 
-    public function getFieldDocumentationArgs(string $fieldName): ?array
+    public function getFieldDocumentationArgs($fieldResolver, string $fieldName): ?array
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
@@ -76,17 +76,17 @@ class FieldValueResolver_Posts extends AbstractDBDataFieldValueResolver
                 ];
         }
 
-        return parent::getFieldDocumentationArgs($fieldName);
+        return parent::getFieldDocumentationArgs($fieldResolver, $fieldName);
     }
 
-    public function resolveFieldDefaultDataloaderClass(string $fieldName, array $fieldArgs = []): ?string
+    public function resolveFieldDefaultDataloaderClass($fieldResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         switch ($fieldName) {
             case 'featuredimage':
                 return \PoP\Media\Dataloader_MediaList::class;
         }
 
-        return parent::resolveFieldDefaultDataloaderClass($fieldName, $fieldArgs);
+        return parent::resolveFieldDefaultDataloaderClass($fieldResolver, $fieldName, $fieldArgs);
     }
 }
 
