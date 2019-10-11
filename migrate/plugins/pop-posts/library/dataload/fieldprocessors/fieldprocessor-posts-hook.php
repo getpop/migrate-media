@@ -91,4 +91,4 @@ class FieldValueResolver_Posts extends AbstractDBDataFieldValueResolver
 }
 
 // Static Initialization: Attach
-FieldValueResolver_Posts::attach(POP_ATTACHABLEEXTENSIONGROUP_FIELDVALUERESOLVERS);
+FieldValueResolver_Posts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDVALUERESOLVERS);
