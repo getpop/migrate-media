@@ -3,6 +3,7 @@ namespace PoP\Media;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldValueResolvers\AbstractDBDataFieldValueResolver;
+use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 
 class FieldValueResolver_Media extends AbstractDBDataFieldValueResolver
 {
@@ -19,7 +20,7 @@ class FieldValueResolver_Media extends AbstractDBDataFieldValueResolver
         ];
     }
 
-    public function getFieldDocumentationType($fieldResolver, string $fieldName): ?string
+    public function getFieldDocumentationType(FieldResolverInterface $fieldResolver, string $fieldName): ?string
     {
         $types = [
 			'author' => SchemaDefinition::TYPE_ID,
@@ -28,7 +29,7 @@ class FieldValueResolver_Media extends AbstractDBDataFieldValueResolver
         return $types[$fieldName] ?? parent::getFieldDocumentationType($fieldResolver, $fieldName);
     }
 
-    public function getFieldDocumentationDescription($fieldResolver, string $fieldName): ?string
+    public function getFieldDocumentationDescription(FieldResolverInterface $fieldResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
@@ -37,7 +38,7 @@ class FieldValueResolver_Media extends AbstractDBDataFieldValueResolver
         ];
         return $descriptions[$fieldName] ?? parent::getFieldDocumentationDescription($fieldResolver, $fieldName);
     }
-    public function resolveSchemaValidationErrorDescription($fieldResolver, string $fieldName, array $fieldArgs = []): ?string
+    public function resolveSchemaValidationErrorDescription(FieldResolverInterface $fieldResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
@@ -57,7 +58,7 @@ class FieldValueResolver_Media extends AbstractDBDataFieldValueResolver
         return parent::resolveSchemaValidationErrorDescription($fieldResolver, $fieldName, $fieldArgs);
     }
 
-    public function resolveValue($fieldResolver, $resultItem, string $fieldName, array $fieldArgs = [])
+    public function resolveValue(FieldResolverInterface $fieldResolver, $resultItem, string $fieldName, array $fieldArgs = [])
     {
         $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
         $media = $resultItem;
@@ -105,7 +106,7 @@ class FieldValueResolver_Media extends AbstractDBDataFieldValueResolver
         ];
     }
 
-    public function getFieldDocumentationArgs($fieldResolver, string $fieldName): array
+    public function getFieldDocumentationArgs(FieldResolverInterface $fieldResolver, string $fieldName): array
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
@@ -128,7 +129,7 @@ class FieldValueResolver_Media extends AbstractDBDataFieldValueResolver
         return parent::getFieldDocumentationArgs($fieldResolver, $fieldName);
     }
 
-    public function resolveFieldDefaultDataloaderClass($fieldResolver, string $fieldName, array $fieldArgs = []): ?string
+    public function resolveFieldDefaultDataloaderClass(FieldResolverInterface $fieldResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         switch ($fieldName) {
             case 'author':

@@ -3,6 +3,7 @@ namespace PoP\Media;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldValueResolvers\AbstractDBDataFieldValueResolver;
+use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 
 class FieldValueResolver_Posts extends AbstractDBDataFieldValueResolver
 {
@@ -20,7 +21,7 @@ class FieldValueResolver_Posts extends AbstractDBDataFieldValueResolver
         ];
     }
 
-    public function getFieldDocumentationType($fieldResolver, string $fieldName): ?string
+    public function getFieldDocumentationType(FieldResolverInterface $fieldResolver, string $fieldName): ?string
     {
         $types = [
 			'has-featuredimage' => SchemaDefinition::TYPE_BOOL,
@@ -30,7 +31,7 @@ class FieldValueResolver_Posts extends AbstractDBDataFieldValueResolver
         return $types[$fieldName] ?? parent::getFieldDocumentationType($fieldResolver, $fieldName);
     }
 
-    public function getFieldDocumentationDescription($fieldResolver, string $fieldName): ?string
+    public function getFieldDocumentationDescription(FieldResolverInterface $fieldResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
@@ -41,7 +42,7 @@ class FieldValueResolver_Posts extends AbstractDBDataFieldValueResolver
         return $descriptions[$fieldName] ?? parent::getFieldDocumentationDescription($fieldResolver, $fieldName);
     }
 
-    public function resolveValue($fieldResolver, $resultItem, string $fieldName, array $fieldArgs = [])
+    public function resolveValue(FieldResolverInterface $fieldResolver, $resultItem, string $fieldName, array $fieldArgs = [])
     {
         $cmsmediapostsapi = \PoP\Media\PostsFunctionAPIFactory::getInstance();
         $post = $resultItem;
@@ -62,7 +63,7 @@ class FieldValueResolver_Posts extends AbstractDBDataFieldValueResolver
         return parent::resolveValue($fieldResolver, $resultItem, $fieldName, $fieldArgs);
     }
 
-    public function getFieldDocumentationArgs($fieldResolver, string $fieldName): array
+    public function getFieldDocumentationArgs(FieldResolverInterface $fieldResolver, string $fieldName): array
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
@@ -79,7 +80,7 @@ class FieldValueResolver_Posts extends AbstractDBDataFieldValueResolver
         return parent::getFieldDocumentationArgs($fieldResolver, $fieldName);
     }
 
-    public function resolveFieldDefaultDataloaderClass($fieldResolver, string $fieldName, array $fieldArgs = []): ?string
+    public function resolveFieldDefaultDataloaderClass(FieldResolverInterface $fieldResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         switch ($fieldName) {
             case 'featuredimage':
