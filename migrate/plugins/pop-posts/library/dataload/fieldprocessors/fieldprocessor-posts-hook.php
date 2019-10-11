@@ -20,17 +20,17 @@ class FieldValueResolver_Posts extends AbstractDBDataFieldValueResolver
         ];
     }
 
-    public function getFieldDocumentationType(string $fieldName): ?string
+    public function getFieldDocumentationType($fieldResolver, string $fieldName): ?string
     {
         $types = [
 			'has-featuredimage' => SchemaDefinition::TYPE_BOOL,
             'featuredimage' => SchemaDefinition::TYPE_ID,
             'featuredimage-props' => SchemaDefinition::TYPE_OBJECT,
         ];
-        return $types[$fieldName];
+        return $types[$fieldName] ?? parent::getFieldDocumentationType($fieldResolver, $fieldName);
     }
 
-    public function getFieldDocumentationDescription(string $fieldName): ?string
+    public function getFieldDocumentationDescription($fieldResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
@@ -38,7 +38,7 @@ class FieldValueResolver_Posts extends AbstractDBDataFieldValueResolver
             'featuredimage' => $translationAPI->__('ID of the featured image DB object', 'pop-media'),
             'featuredimage-props' => $translationAPI->__('Properties (url, width and height) of the featured image', 'pop-media'),
         ];
-        return $descriptions[$fieldName];
+        return $descriptions[$fieldName] ?? parent::getFieldDocumentationDescription($fieldResolver, $fieldName);
     }
 
     public function resolveValue($fieldResolver, $resultItem, string $fieldName, array $fieldArgs = [])

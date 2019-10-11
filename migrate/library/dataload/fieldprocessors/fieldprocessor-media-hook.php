@@ -19,23 +19,23 @@ class FieldValueResolver_Media extends AbstractDBDataFieldValueResolver
         ];
     }
 
-    public function getFieldDocumentationType(string $fieldName): ?string
+    public function getFieldDocumentationType($fieldResolver, string $fieldName): ?string
     {
         $types = [
 			'author' => SchemaDefinition::TYPE_ID,
             'src' => SchemaDefinition::TYPE_STRING,
         ];
-        return $types[$fieldName];
+        return $types[$fieldName] ?? parent::getFieldDocumentationType($fieldResolver, $fieldName);
     }
 
-    public function getFieldDocumentationDescription(string $fieldName): ?string
+    public function getFieldDocumentationDescription($fieldResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
 			'author' => $translationAPI->__('ID of the media element\'s author', 'pop-media'),
             'src' => $translationAPI->__('Media element URL source', 'pop-media'),
         ];
-        return $descriptions[$fieldName];
+        return $descriptions[$fieldName] ?? parent::getFieldDocumentationDescription($fieldResolver, $fieldName);
     }
     public function resolveSchemaValidationErrorDescription($fieldResolver, string $fieldName, array $fieldArgs = []): ?string
     {
