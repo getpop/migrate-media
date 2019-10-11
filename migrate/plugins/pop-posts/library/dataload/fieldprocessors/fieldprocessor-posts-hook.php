@@ -62,7 +62,7 @@ class FieldValueResolver_Posts extends AbstractDBDataFieldValueResolver
         return parent::resolveValue($fieldResolver, $resultItem, $fieldName, $fieldArgs);
     }
 
-    public function getFieldDocumentationArgs($fieldResolver, string $fieldName): ?array
+    public function getFieldDocumentationArgs($fieldResolver, string $fieldName): array
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {

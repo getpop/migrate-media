@@ -105,7 +105,7 @@ class FieldValueResolver_Media extends AbstractDBDataFieldValueResolver
         ];
     }
 
-    public function getFieldDocumentationArgs($fieldResolver, string $fieldName): ?array
+    public function getFieldDocumentationArgs($fieldResolver, string $fieldName): array
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
