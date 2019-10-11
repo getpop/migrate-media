@@ -2,8 +2,9 @@
 namespace PoP\Media;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\FieldValueResolvers\AbstractDBDataFieldValueResolver;
 
-class FieldValueResolver_Media extends \PoP\ComponentModel\AbstractDBDataFieldValueResolver
+class FieldValueResolver_Media extends AbstractDBDataFieldValueResolver
 {
     public static function getClassesToAttachTo(): array
     {
