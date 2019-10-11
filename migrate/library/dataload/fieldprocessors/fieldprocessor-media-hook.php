@@ -12,7 +12,7 @@ class FieldValueResolver_Media extends AbstractDBDataFieldValueResolver
         return array(\PoP\Media\FieldResolver_Media::class);
     }
 
-    public function getFieldNamesToResolve(): array
+    public static function getFieldNamesToResolve(): array
     {
         return [
             'author',

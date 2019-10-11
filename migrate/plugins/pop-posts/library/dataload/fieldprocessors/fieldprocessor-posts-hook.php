@@ -12,7 +12,7 @@ class FieldValueResolver_Posts extends AbstractDBDataFieldValueResolver
         return array(\PoP\Posts\FieldResolver_Posts::class);
     }
 
-    public function getFieldNamesToResolve(): array
+    public static function getFieldNamesToResolve(): array
     {
         return [
             'has-featuredimage',
