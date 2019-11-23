@@ -1,9 +1,11 @@
 <?php
 namespace PoP\Media;
+
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldValueResolvers\AbstractDBDataFieldValueResolver;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\FieldQuery\FieldQueryUtils;
 
 class FieldValueResolver_Media extends AbstractDBDataFieldValueResolver
 {
@@ -40,19 +42,21 @@ class FieldValueResolver_Media extends AbstractDBDataFieldValueResolver
     }
     public function resolveSchemaValidationErrorDescription(FieldResolverInterface $fieldResolver, string $fieldName, array $fieldArgs = []): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        switch ($fieldName) {
-            case 'src':
-                if (isset($fieldArgs['device']) && !in_array(
-                    $fieldArgs['device'],
-                    $this->getDeviceValues()
-                )) {
-                    return sprintf(
-                        $translationAPI->__('Argument \'device\' can only have these values: \'%s\'', 'pop-media'),
-                        implode($translationAPI->__('\', \''), $this->getDeviceValues())
-                    );
-                }
-                break;
+        if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldArgs)) {
+            $translationAPI = TranslationAPIFacade::getInstance();
+            switch ($fieldName) {
+                case 'src':
+                    if (isset($fieldArgs['device']) && !in_array(
+                        $fieldArgs['device'],
+                        $this->getDeviceValues()
+                    )) {
+                        return sprintf(
+                            $translationAPI->__('Argument \'device\' can only have these values: \'%s\'', 'pop-media'),
+                            implode($translationAPI->__('\', \''), $this->getDeviceValues())
+                        );
+                    }
+                    break;
+            }
         }
 
         return parent::resolveSchemaValidationErrorDescription($fieldResolver, $fieldName, $fieldArgs);
