@@ -62,7 +62,7 @@ class FieldValueResolver_Media extends AbstractDBDataFieldValueResolver
         return parent::resolveSchemaValidationErrorDescription($fieldResolver, $fieldName, $fieldArgs);
     }
 
-    public function resolveValue(FieldResolverInterface $fieldResolver, $resultItem, string $fieldName, array $fieldArgs = [])
+    public function resolveValue(FieldResolverInterface $fieldResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
         $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
         $media = $resultItem;
@@ -99,7 +99,7 @@ class FieldValueResolver_Media extends AbstractDBDataFieldValueResolver
                 return $properties['src'];
         }
 
-        return parent::resolveValue($fieldResolver, $resultItem, $fieldName, $fieldArgs);
+        return parent::resolveValue($fieldResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
     protected function getDeviceValues() {
