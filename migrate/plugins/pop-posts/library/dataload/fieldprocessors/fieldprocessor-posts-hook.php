@@ -3,14 +3,14 @@ namespace PoP\Media;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldValueResolvers\AbstractDBDataFieldValueResolver;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
-use PoP\Posts\FieldResolvers\PostFieldResolver;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Posts\TypeResolvers\PostTypeResolver;
 
 class FieldValueResolver_Posts extends AbstractDBDataFieldValueResolver
 {
     public static function getClassesToAttachTo(): array
     {
-        return array(PostFieldResolver::class);
+        return array(PostTypeResolver::class);
     }
 
     public static function getFieldNamesToResolve(): array
@@ -22,17 +22,17 @@ class FieldValueResolver_Posts extends AbstractDBDataFieldValueResolver
         ];
     }
 
-    public function getSchemaFieldType(FieldResolverInterface $fieldResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
 			'has-featuredimage' => SchemaDefinition::TYPE_BOOL,
             'featuredimage' => SchemaDefinition::TYPE_ID,
             'featuredimage-props' => SchemaDefinition::TYPE_OBJECT,
         ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($fieldResolver, $fieldName);
+        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldDescription(FieldResolverInterface $fieldResolver, string $fieldName): ?string
+    public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
@@ -40,31 +40,31 @@ class FieldValueResolver_Posts extends AbstractDBDataFieldValueResolver
             'featuredimage' => $translationAPI->__('ID of the featured image DB object', 'pop-media'),
             'featuredimage-props' => $translationAPI->__('Properties (url, width and height) of the featured image', 'pop-media'),
         ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldResolver, $fieldName);
+        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function resolveValue(FieldResolverInterface $fieldResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
+    public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
         $cmsmediapostsapi = \PoP\Media\PostsFunctionAPIFactory::getInstance();
         $post = $resultItem;
         switch ($fieldName) {
             case 'has-featuredimage':
-                return $cmsmediapostsapi->hasPostThumbnail($fieldResolver->getId($post));
+                return $cmsmediapostsapi->hasPostThumbnail($typeResolver->getId($post));
 
             case 'featuredimage':
-                return $cmsmediapostsapi->getPostThumbnailId($fieldResolver->getId($post));
+                return $cmsmediapostsapi->getPostThumbnailId($typeResolver->getId($post));
 
             case 'featuredimage-props':
-                if ($image_id = $cmsmediapostsapi->getPostThumbnailId($fieldResolver->getId($post))) {
+                if ($image_id = $cmsmediapostsapi->getPostThumbnailId($typeResolver->getId($post))) {
                     return Utils::getAttachmentImageProperties($image_id, $fieldArgs['size']);
                 }
                 return null;
         }
 
-        return parent::resolveValue($fieldResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function getSchemaFieldArgs(FieldResolverInterface $fieldResolver, string $fieldName): array
+    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
@@ -78,17 +78,17 @@ class FieldValueResolver_Posts extends AbstractDBDataFieldValueResolver
                 ];
         }
 
-        return parent::getSchemaFieldArgs($fieldResolver, $fieldName);
+        return parent::getSchemaFieldArgs($typeResolver, $fieldName);
     }
 
-    public function resolveFieldDefaultDataloaderClass(FieldResolverInterface $fieldResolver, string $fieldName, array $fieldArgs = []): ?string
+    public function resolveFieldDefaultDataloaderClass(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         switch ($fieldName) {
             case 'featuredimage':
                 return \PoP\Media\Dataloader_MediaList::class;
         }
 
-        return parent::resolveFieldDefaultDataloaderClass($fieldResolver, $fieldName, $fieldArgs);
+        return parent::resolveFieldDefaultDataloaderClass($typeResolver, $fieldName, $fieldArgs);
     }
 }
 
