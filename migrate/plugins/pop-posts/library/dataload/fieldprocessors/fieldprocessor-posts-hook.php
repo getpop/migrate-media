@@ -2,11 +2,11 @@
 namespace PoP\Media;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\FieldValueResolvers\AbstractDBDataFieldValueResolver;
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Posts\TypeResolvers\PostTypeResolver;
 
-class FieldValueResolver_Posts extends AbstractDBDataFieldValueResolver
+class FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
     public static function getClassesToAttachTo(): array
     {
@@ -93,4 +93,4 @@ class FieldValueResolver_Posts extends AbstractDBDataFieldValueResolver
 }
 
 // Static Initialization: Attach
-FieldValueResolver_Posts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDVALUERESOLVERS);
+FieldResolver_Posts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

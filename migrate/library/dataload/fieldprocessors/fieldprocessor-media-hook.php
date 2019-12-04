@@ -3,11 +3,11 @@ namespace PoP\Media;
 
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\FieldValueResolvers\AbstractDBDataFieldValueResolver;
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\FieldQuery\FieldQueryUtils;
 
-class FieldValueResolver_Media extends AbstractDBDataFieldValueResolver
+class FieldResolver_Media extends AbstractDBDataFieldResolver
 {
     public static function getClassesToAttachTo(): array
     {
@@ -145,4 +145,4 @@ class FieldValueResolver_Media extends AbstractDBDataFieldValueResolver
 }
 
 // Static Initialization: Attach
-FieldValueResolver_Media::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDVALUERESOLVERS);
+FieldResolver_Media::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
