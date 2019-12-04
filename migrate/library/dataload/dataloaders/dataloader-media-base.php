@@ -13,16 +13,12 @@ abstract class Dataloader_MediaBase extends \PoP\ComponentModel\QueryDataDataloa
         return TypeResolver_Media::class;
     }
 
-    public function executeGetData(array $ids): array
+    protected function executeGetData(array $ids): array
     {
-        if ($ids) {
-            $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
-            $query = array(
-                'include' => $ids,
-            );
-            return $cmsmediaapi->getMediaElements($query);
-        }
-
-        return [];
+        $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
+        $query = array(
+            'include' => $ids,
+        );
+        return $cmsmediaapi->getMediaElements($query);
     }
 }
