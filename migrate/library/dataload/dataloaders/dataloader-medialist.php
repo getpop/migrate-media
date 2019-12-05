@@ -1,8 +1,28 @@
 <?php
 namespace PoP\Media;
+use PoP\ComponentModel\TypeDataResolvers\AbstractTypeQueryableDataResolver;
 
-class Dataloader_MediaList extends Dataloader_MediaListBase
+class Dataloader_MediaList extends AbstractTypeQueryableDataResolver
 {
+    public function getDatabaseKey()
+    {
+        return GD_DATABASE_KEY_MEDIA;
+    }
+
+    public function getTypeResolverClass(): string
+    {
+        return TypeResolver_Media::class;
+    }
+
+    public function resolveObjectsFromIDs(array $ids): array
+    {
+        $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
+        $query = array(
+            'include' => $ids,
+        );
+        return $cmsmediaapi->getMediaElements($query);
+    }
+    
     public function getDataFromIdsQuery(array $ids): array
     {
         $query = array();
