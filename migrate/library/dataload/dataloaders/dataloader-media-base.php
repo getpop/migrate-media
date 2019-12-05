@@ -1,7 +1,8 @@
 <?php
 namespace PoP\Media;
+use PoP\ComponentModel\TypeDataResolvers\AbstractTypeQueryableDataResolver;
 
-abstract class Dataloader_MediaBase extends \PoP\ComponentModel\Dataloader
+abstract class Dataloader_MediaBase extends AbstractTypeQueryableDataResolver
 {
     public function getDatabaseKey()
     {
