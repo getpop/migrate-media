@@ -11,7 +11,7 @@ class TypeResolver_Media extends AbstractTypeResolver
         return $cmsmediaresolver->getMediaId($media);
     }
 
-    public function getIdFieldDataloaderClass()
+    public function getIdFieldTypeDataResolverClass()
     {
         return \PoP\Media\Dataloader_MediaList::class;
     }
