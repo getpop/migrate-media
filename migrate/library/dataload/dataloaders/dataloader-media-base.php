@@ -1,7 +1,7 @@
 <?php
 namespace PoP\Media;
 
-abstract class Dataloader_MediaBase extends \PoP\ComponentModel\QueryDataDataloader
+abstract class Dataloader_MediaBase extends \PoP\ComponentModel\FilterableDataDataloader
 {
     public function getDatabaseKey()
     {
