@@ -13,7 +13,7 @@ abstract class Dataloader_MediaBase extends \PoP\ComponentModel\FilterableDataDa
         return TypeResolver_Media::class;
     }
 
-    protected function executeGetData(array $ids): array
+    public function resolveObjectsFromIDs(array $ids): array
     {
         $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
         $query = array(
