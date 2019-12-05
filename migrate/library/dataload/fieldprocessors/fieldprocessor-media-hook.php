@@ -133,14 +133,14 @@ class FieldResolver_Media extends AbstractDBDataFieldResolver
         return parent::getSchemaFieldArgs($typeResolver, $fieldName);
     }
 
-    public function resolveFieldDefaultDataloaderClass(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
+    public function resolveFieldDefaultTypeDataResolverClass(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         switch ($fieldName) {
             case 'author':
                 return \PoP\Users\Dataloader_ConvertibleUserList::class;
         }
 
-        return parent::resolveFieldDefaultDataloaderClass($typeResolver, $fieldName, $fieldArgs);
+        return parent::resolveFieldDefaultTypeDataResolverClass($typeResolver, $fieldName, $fieldArgs);
     }
 }
 

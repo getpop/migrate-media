@@ -81,14 +81,14 @@ class FieldResolver_Posts extends AbstractDBDataFieldResolver
         return parent::getSchemaFieldArgs($typeResolver, $fieldName);
     }
 
-    public function resolveFieldDefaultDataloaderClass(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
+    public function resolveFieldDefaultTypeDataResolverClass(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         switch ($fieldName) {
             case 'featuredimage':
                 return \PoP\Media\Dataloader_MediaList::class;
         }
 
-        return parent::resolveFieldDefaultDataloaderClass($typeResolver, $fieldName, $fieldArgs);
+        return parent::resolveFieldDefaultTypeDataResolverClass($typeResolver, $fieldName, $fieldArgs);
     }
 }
 
