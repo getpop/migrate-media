@@ -4,6 +4,13 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 
 class TypeResolver_Media extends AbstractTypeResolver
 {
+    public const DATABASE_KEY = 'media';
+
+    public function getDatabaseKey()
+    {
+        return self::DATABASE_KEY;
+    }
+
     public function getId($resultItem)
     {
         $cmsmediaresolver = \PoP\Media\ObjectPropertyResolverFactory::getInstance();

@@ -4,11 +4,6 @@ use PoP\ComponentModel\TypeDataResolvers\AbstractTypeQueryableDataResolver;
 
 class Dataloader_MediaList extends AbstractTypeQueryableDataResolver
 {
-    public function getDatabaseKey()
-    {
-        return GD_DATABASE_KEY_MEDIA;
-    }
-
     public function getTypeResolverClass(): string
     {
         return TypeResolver_Media::class;
