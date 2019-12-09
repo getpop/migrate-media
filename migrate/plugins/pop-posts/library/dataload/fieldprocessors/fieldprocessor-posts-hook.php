@@ -1,10 +1,13 @@
 <?php
 namespace PoP\Media;
+
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Posts\TypeResolvers\PostTypeResolver;
+use PoP\Media\TypeDataResolvers\MediaTypeDataResolver;
+use PoP\Media\Misc\MediaHelpers;
 
 class FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
@@ -56,7 +59,7 @@ class FieldResolver_Posts extends AbstractDBDataFieldResolver
 
             case 'featuredimage-props':
                 if ($image_id = $cmsmediapostsapi->getPostThumbnailId($typeResolver->getId($post))) {
-                    return Utils::getAttachmentImageProperties($image_id, $fieldArgs['size']);
+                    return MediaHelpers::getAttachmentImageProperties($image_id, $fieldArgs['size']);
                 }
                 return null;
         }
@@ -85,7 +88,7 @@ class FieldResolver_Posts extends AbstractDBDataFieldResolver
     {
         switch ($fieldName) {
             case 'featuredimage':
-                return \PoP\Media\Dataloader_MediaList::class;
+                return MediaTypeDataResolver::class;
         }
 
         return parent::resolveFieldDefaultTypeDataResolverClass($typeResolver, $fieldName, $fieldArgs);
