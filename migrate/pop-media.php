@@ -6,7 +6,7 @@ Description: The foundation for a PoP Media
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-namespace PoP\Media;
+namespace PoPSchema\Media;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------

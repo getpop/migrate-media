@@ -1,5 +1,5 @@
 <?php
-namespace PoP\Media;
+namespace PoPSchema\Media;
 
 interface FunctionAPI
 {

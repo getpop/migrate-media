@@ -1,7 +1,7 @@
 {
-    "name": "getpop/migrate-media",
+    "name": "pop-schema/migrate-media",
     "type": "library",
-    "description": "(Temporary package) Migrate code to package https://github.com/getpop/media. Target package description: Adds support for media",
+    "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/media. Target package description: Adds support for media",
     "keywords": [
         "PoP",
         "media"

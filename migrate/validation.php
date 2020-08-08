@@ -1,5 +1,5 @@
 <?php
-namespace PoP\Media;
+namespace PoPSchema\Media;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 

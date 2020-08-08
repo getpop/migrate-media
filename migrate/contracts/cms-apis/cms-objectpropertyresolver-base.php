@@ -1,5 +1,5 @@
 <?php
-namespace PoP\Media;
+namespace PoPSchema\Media;
 
 abstract class ObjectPropertyResolver_Base implements ObjectPropertyResolver
 {
